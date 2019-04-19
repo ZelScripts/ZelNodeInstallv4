@@ -240,11 +240,11 @@ echo -e "${YELLOW}Done fetching chain params.${NC}"
 
 #Downloading update script
 echo -e "${GREEN}Downloading update script for future updates...${NC}"
-wget https://raw.githubusercontent.com/dk808/ZelnodeScript/master/zelnodeupdate.sh && chmod +x zelnodeupdate.sh
+wget https://raw.githubusercontent.com/ZelScripts/ZelNodeInstallv4/master/zelnodeupdate.sh && chmod +x zelnodeupdate.sh
 
 #Downloading chown script and create cron job to run it every minute
 echo -e "${GREEN}Installing chown script to make sure working directory is owned by User...${NC}"
-wget https://raw.githubusercontent.com/dk808/ZelnodeScript/master/chown.sh && chmod +x chown.sh
+wget https://raw.githubusercontent.com/ZelScripts/ZelNodeInstallv4/master/chown.sh && chmod +x chown.sh
 echo -e "${GREEN}Creating cron job to run the chown script...${NC}"
 crontab -l > tempcron
 echo "* * * * * /home/$USERNAME/chown.sh >/dev/null 2>&1" >> tempcron
