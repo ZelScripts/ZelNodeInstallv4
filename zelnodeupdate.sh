@@ -51,45 +51,19 @@ if [ "$ISROOT" = "root" ]; then
 fi
 sleep 2
 
-#Install Ubuntu updates
-echo -e "${YELLOW}================================================================="
-echo "Updating your OS..."
-echo -e "=================================================================${NC}"
-
 #Closing zelcash daemon
-#echo -e "${YELLOW}Stopping & removing all old instances of $COIN_NAME and Downloading new wallet...${NC}"
+echo -e "${YELLOW}Stopping daemon...${NC}"
 sudo systemctl stop zelcash > /dev/null 2>&1 && sleep 3
 sudo zelcash-cli stop > /dev/null 2>&1 && sleep 5
 sudo killall $COIN_DAEMON > /dev/null 2>&1
-#Removing old zelcash files
-#sudo apt-get purge zelcash -y
 echo -e "${YELLOW}Updating new wallet binaries...${NC}"
-#Install zelcash files using APT
-#adding ZelCash APT Repo
-#if [ -f /etc/apt/sources.list.d/zelcash.list ]; then
-    #echo -e "\033[1;36mExisting repo found, backing up to ~/zelcash.list.old ...\033[0m"
-    #sudo mv /etc/apt/sources.list.d/zelcash.list ~/zelcash.list.old;
-    #sudo rm -rf ~/zelcash.list.old
-    #sleep 2
-#fi
-#echo 'deb https://apt.zel.cash/ all main' | sudo tee --append /etc/apt/sources.list.d/zelcash.list > /dev/null
-#gpg --keyserver keyserver.ubuntu.com --recv 4B69CA27A986265D > /dev/null
-#gpg --export 4B69CA27A986265D | sudo apt-key add -
-#sudo apt-get update -y
-#Installing ZelCash via APT if it is not installed already via APT or update if it is
-#sudo apt-get install zelcash
+
+#Updating zelcash package
+echo -e "${GREEN}Upgrading Zelcash package...${NC}"
 sudo apt-get install --only-upgrade zelcash -y
 sudo chmod 755 /usr/local/bin/zelcash*
-#Install Ubuntu updates
-echo -e "${YELLOW}======================================================="
-echo "Updating your OS..."
-echo -e "=======================================================${NC}"
-echo -e "${GREEN}Installing package updates...${NC}"
-#Update and upgrade packages
-#sudo apt-get update -y
-#sudo apt-get upgrade -y
-echo -e "${GREEN}Linux Packages Updates complete...${NC}"
-sleep 2
+sleep2
+
 #Notice to user we are complete and request a reboot
 echo -e "${GREEN}Update complete. Please reboot the VPS by typing: ${CYAN}sudo reboot -n"
 echo -e "${GREEN}Then verify the ZelCash daemon has started by typing: ${CYAN}zelcash-cli getinfo${NC}"
